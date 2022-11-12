@@ -24,6 +24,7 @@
 #include <algorithm>
 #include <map>
 #include <cassert>
+#include <conio.h>
 
 #include "BoolTable.h"
 #include "MoveCoord.h"
@@ -36,7 +37,6 @@ map<char, int> preced;
 int precedence(char ch) {
 	return preced[ch];
 }
-
 
 
 pair<int, int> difference(string a, string b) { // count last id of differnet values and amount of differneces (dif, id)
@@ -87,25 +87,41 @@ int32_t main() {
 	preced['+'] = 1;
 	preced['*'] = 2;
 	
+	cout << "Choose a variant of input\n";
+	cout << "1. Vector of function, using hex. Example: 23577999\n";
+	cout << "2. An expresion. Example: ad + de + ab!e + ac!e + b!cd + a!b!ce + !abce\n";
+
 	string expr;
-	expr = "23577999";
-	//getline(cin, expr);
-	BoolTable table(expr, true);
-	cout << "\t\t\t\tFunction table\n\n";
+	int cmd;
+	while ((scanf_s("%d", &cmd, 1000)) != 1 || (cmd != 1 && cmd != 2)) {
+		cout << "No such command. Try again\n";
+	}
+	cin.ignore(10000, '\n');
+	getline(cin, expr);
+
+	BoolTable table;
+	
+	if (cmd == 1) {
+		table = BoolTable(expr, true);
+	}
+	else if (cmd == 2) {
+		table = BoolTable(expr);
+	}
+	
+	cout << "\n\n" << "Function table" << '\n';
 	table.printTable();
 	cout << "\n\n";
 	
 	Quine_McCluskey_algorithm quine(table);
-	cout << "\t\t\t\t\tMerging chart\n\n";
+	cout << "Merging chart\n";
 	quine.printMergingChart();
 	cout << "\n\n";
 	
-	cout << quine.GetMinimizedFunction();
-	cout << "\t\t\t\t\t\tPrime Implicants Table\n\n";
+	cout << "Prime Implicants Table\n";
 	quine.printPrimeImplicantTable();
-	//table.printTable();
-	cout << "\n\n\n";
-	cout << "\t\t\t\t\tMinimized Function\n\n";
+
+	cout << "\n\n";
+	cout << "Minimized Function\n";
 	string ans = quine.GetMinimizedFunction();
 	cout << endl <<"   "<<ans << endl << endl;
 	
