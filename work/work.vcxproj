@@ -139,7 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoolTable.cpp" />
+    <ClCompile Include="Expression.cpp" />
+    <ClCompile Include="MoveCoord.cpp" />
+    <ClCompile Include="Quine_McCluskey_algorithm.cpp" />
     <ClCompile Include="work.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BoolTable.h" />
+    <ClInclude Include="Expression.h" />
+    <ClInclude Include="MoveCoord.h" />
+    <ClInclude Include="Quine_McCluskey_algorithm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
